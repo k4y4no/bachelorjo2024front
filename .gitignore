@@ -40,3 +40,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Test frameworks
+cypress.config.ts
+cypress/
+jest.config.ts
+setup-jest.ts
