@@ -3,6 +3,7 @@ import { ApiService } from '../../_services/api/api.service';
 import { Observable, tap } from 'rxjs';
 import { EventJO } from '../../_interfaces/event';
 import { AsyncPipe } from '@angular/common';
+import { EventjoService } from '../../_services/eventJOService/eventjo.service';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,12 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit{
-  private apiService: ApiService = inject(ApiService)
+  private eventJOService: EventjoService = inject(EventjoService)
 
   events$!: Observable<EventJO[]>
 
     ngOnInit(): void {
-        this.events$ = this.apiService.getAllItems('event').pipe(
+        this.events$ = this.eventJOService.getAll('event').pipe(
     tap(events => console.log(events))
   );
     }
