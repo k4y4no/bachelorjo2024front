@@ -1,0 +1,43 @@
+<form action="" [formGroup]="registerForm" id="formRegister" (ngSubmit)="onSubmit()">
+  <h2>Formulaire d'inscription</h2>  
+    <div>
+        <label>Name:</label>
+        <input formControlName="name" type="text">
+        @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched){
+            <span>Name is required</span>
+        }
+    </div>
+    <div>
+        <label>First Name:</label>
+        <input formControlName="firstname" type="text">
+        @if (registerForm.get('firstname')?.invalid && registerForm.get('firstname')?.touched){
+            <span>Firstname is required</span>
+        }
+    </div>
+    <div>
+        <label>Phone:</label>
+        <input formControlName="phone" type="phone">
+        @if (registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched){
+            <span>Phone is required</span>
+        }
+    </div>
+    <div>
+        <label>Email:</label>
+        <input formControlName="email" type="email">
+        @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched){
+            <span>Email is required</span>
+        }
+    </div>
+    <div>
+      <label>Password:</label>
+      <input formControlName="password" type="password">
+        @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched){
+            <span>Password is required</span>
+        }
+    </div>
+    <div>
+      <input id="honeyPot">
+    </div>
+    <!-- <button type="submit" [disabled]="!profileForm.valid">Submit</button> -->
+    <button type="submit">S'inscrire</button>
+</form>
