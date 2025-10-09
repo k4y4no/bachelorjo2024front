@@ -45,24 +45,24 @@ ngOnInit() {
   onSubmit(){
     this.errorMessage = ''
 
-            const user: UserLogin = {...this.loginUserForm.getRawValue()}
-            this.authService.login(user).subscribe({
-              next: (response) => {
-                console.log('Token', response)
-                this.connectionMarker = true
-                // const role: string | null= this.tokenService.getRoleToken(response.access_token)
-                if(this.authService.isConnected() !== null){
-                  this.router.navigate(['home'])
-                  return
-                }
-                // this.router.navigate(['profile'])
-                
-              },
-              error: (err) => {
-                console.error('Error', err)
-                this.errorMessage = err.error.detail
-              }
-            })
+    const user: UserLogin = {...this.loginUserForm.getRawValue()}
+    this.authService.login(user).subscribe({
+      next: (response) => {
+        console.log('Token', response)
+        this.connectionMarker = true
+        // const role: string | null= this.tokenService.getRoleToken(response.access_token)
+        if(this.authService.isConnected() !== null){
+          this.router.navigate(['profile'])
+          return
+        }
+        // this.router.navigate(['profile'])
+        
+      },
+      error: (err) => {
+        console.error('Error', err)
+        this.errorMessage = err.error.detail
+      }
+    })
 
   }
 }

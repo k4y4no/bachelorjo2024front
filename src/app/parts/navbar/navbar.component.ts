@@ -2,6 +2,7 @@ import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { Event, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../_services/authService/auth.service';
 import { TitleCasePipe } from '@angular/common';
+import { AppService } from '../../_services/appService/app.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,23 +17,26 @@ export class NavbarComponent implements OnInit {
 
     router = inject(Router)
     authService = inject(AuthService)
+    appService = inject(AppService)
     innerWidth: number = 0;
     isMenuOpen:boolean = false;
     logMenu: string = "login"
     isAuthenticated: boolean | null = null;
+    isAdmin: boolean | null = null;
+    profileOn: string = "register"
 
     constructor(){
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.toggleMenu()
         this.isAuthenticated = this.authService.isConnected() ? true:false
-        // this.isAdmin = this.authService.isAdmin(this.tokenService.getRoleToken(this.authService.getToken()))
+        this.isAdmin = this.appService.hasRole('admin')
         this.logMenu = this.authService.isConnected() ? "logout":"login"
-        // if(this.isAuthenticated) {
-        //   this.profileOn = this.isAdmin ? "dash":"profile"
-        // } else {
-        //   this.profileOn = "register"
-        // }
+        if(this.isAuthenticated) {
+          this.profileOn = this.isAdmin ? "dash":"profile"
+        } else {
+          this.profileOn = "register"
+        }
 
 
       }

@@ -15,4 +15,5 @@ export class UserService extends BaseApiService<UserPublic> {
   createUser(urlAttribute: string, newUser: UserCreate): Observable<UserPublic> {
     return this.create<UserPublic, UserCreate>(urlAttribute, newUser);
   }
+
 }
