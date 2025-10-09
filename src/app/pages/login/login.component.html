@@ -1,0 +1,27 @@
+<form action="" [formGroup]="loginUserForm" id="loginForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label>Email:</label>
+        <input formControlName="email">
+        @if (loginUserForm.get('email')?.invalid && loginUserForm.get('email')?.touched){
+            <span>Email is required</span>
+        }
+        @if (errorMessage !== ''){
+            <span>{{errorMessage}}</span>
+        }
+      </div>
+      <div>
+        <label>Password:</label>
+        <input formControlName="password">
+        @if (loginUserForm.get('password')?.invalid && loginUserForm.get('password')?.touched){
+            <span>Password is required</span>
+        }
+        @if (errorMessage !== ''){
+            <span>{{errorMessage}}</span>
+        }
+      </div>
+      <div>
+        <input id="honeyPot">
+      </div>
+      <!-- <button type="submit" [disabled]="!profileForm.valid">Submit</button> -->
+      <button type="submit">Submit</button>
+</form>
