@@ -4,7 +4,7 @@ export interface UserPublic {
     firstname: string;
     email: string;
     phone: string;
-    role: string;
+    role: [string];
 }
 
 export interface UserCreate {
@@ -18,4 +18,9 @@ export interface UserCreate {
 export interface UserLogin {
     email: string;
     password: string;
+}
+
+export interface ApiAuthResponse {
+    message: string;
+    user: UserPublic;
 }
