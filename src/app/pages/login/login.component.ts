@@ -51,10 +51,10 @@ ngOnInit() {
                 console.log('Token', response)
                 this.connectionMarker = true
                 // const role: string | null= this.tokenService.getRoleToken(response.access_token)
-                // if(this.authService.isAdmin(role)){
-                //   this.router.navigate(['dash'])
-                //   return
-                // }
+                if(this.authService.isConnected() !== null){
+                  this.router.navigate(['home'])
+                  return
+                }
                 // this.router.navigate(['profile'])
                 
               },

@@ -25,9 +25,9 @@ export class AuthService {
     return this.http.post<ApiAuthResponse>(`${this.authUrl}`, credentials, { withCredentials: true }
     ).pipe(
         tap((response: ApiAuthResponse) => {
-            console.log('Login successful, user data:', response.user);
+            // console.log('Login successful, user data:', response.user);
             this._currentUser.set(response.user);
-            console.log('Current user set to:', this.currentUser());
+            // console.log('Current user set to:', this.currentUser());
         })
     );
   }
