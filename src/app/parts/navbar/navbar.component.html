@@ -1,0 +1,13 @@
+  <nav>
+    <ul>
+        <li class="burger" (click)="toggleMenu()">
+          <a> {{isMenuOpen ? "close" : "Menu"}}</a>
+        </li>
+        <li class="menu menu-item" [class.is-open]="isMenuOpen" ><a routerLink="home">Home</a></li>
+        <li class="menu menu-item" [class.is-open]="isMenuOpen" ><a routerLink="offers">Offers</a></li>
+        <li class="menu menu-item" [class.is-open]="isMenuOpen" ><a routerLink="contact">Contact</a></li>
+        <li class="menu menu-item" [class.is-open]="isMenuOpen"  (click)="isAuthenticated && loggingOut()"><a [routerLink]="logMenu">{{logMenu | titlecase}}</a></li>
+        <li class="menu menu-item" [class.is-open]="isMenuOpen" ><a routerLink="register">Register</a></li>
+        <!-- <li class="menu menu-item" [class.is-open]="isMenuOpen" ><a [routerLink]="profileOn">{{profileOn | titlecase}}</a></li> -->
+      </ul>
+  </nav>
