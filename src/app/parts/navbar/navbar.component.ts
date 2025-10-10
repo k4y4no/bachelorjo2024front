@@ -31,9 +31,10 @@ export class NavbarComponent implements OnInit {
         this.toggleMenu()
         this.isAuthenticated = this.authService.isConnected() ? true:false
         this.isAdmin = this.appService.hasRole('admin')
+        console.log("isAdmin", this.isAdmin)
         this.logMenu = this.authService.isConnected() ? "logout":"login"
         if(this.isAuthenticated) {
-          this.profileOn = this.isAdmin ? "dash":"profile"
+          this.profileOn = this.isAdmin ? "dashboard":"profile"
         } else {
           this.profileOn = "register"
         }

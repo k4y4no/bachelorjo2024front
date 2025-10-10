@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { AuthService } from '../authService/auth.service';
+import { UserPublic } from '../../_interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,12 @@ export class AppService {
 
   constructor() { }
 
+  get user(): UserPublic | null {
+  return this.authservice.currentUser();
+}
+
   userRole(): string[] {
-    const user = this.authservice.currentUser();
-    return user?.role ?? [];
+    return this.user?.roles ?? [];
   }
 
   hasRole(role: string): boolean {

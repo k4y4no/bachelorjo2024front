@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserLogin, UserPublic } from '../../_interfaces/user';
 import { AuthService } from '../../_services/authService/auth.service';
 import { interval } from 'rxjs';
+import { AppService } from '../../_services/appService/app.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   private fb = inject(NonNullableFormBuilder)
   private router = inject(Router)
   private authService = inject(AuthService)
+  private appService = inject(AppService)
   errorMessage: string = ''
   connectionMarker: boolean = false
 
@@ -52,7 +54,8 @@ ngOnInit() {
         this.connectionMarker = true
         // const role: string | null= this.tokenService.getRoleToken(response.access_token)
         if(this.authService.isConnected() !== null){
-          this.router.navigate(['profile'])
+          const routeLog = this.appService.hasRole('admin') ? 'dashboard':'profile'
+          this.router.navigate([routeLog])
           return
         }
         // this.router.navigate(['profile'])
