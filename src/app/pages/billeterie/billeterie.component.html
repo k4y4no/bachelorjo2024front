@@ -1,0 +1,23 @@
+<p>billeterie works!</p>
+@if (events$ | async; as eventJO) {
+    @for ( event of eventJO; track event.id) {
+        <div>
+            <h3>{{ event.sport.name }}</h3>
+            <p>{{ event.date_event }}</p>
+            <p>{{ event.location.name }}</p>
+            @if (offers$ | async; as offerTickets) {
+            <ul>
+                @for (offer of offerTickets; track offer.id) {
+
+                        <li>
+                            {{ offer.name }} | {{ offer.price | currency:'EUR' }} | {{ offer.tickets_quantity }}
+                            <button>Buy</button>
+                        </li>
+                    
+                }
+            </ul>
+            }
+        </div>
+        
+    }
+}

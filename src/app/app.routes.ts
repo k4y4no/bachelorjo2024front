@@ -5,12 +5,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from './_guards/auth.guard';
+import { BilleterieComponent } from './pages/billeterie/billeterie.component';
 
 export const routes: Routes = [
     {  path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'billeterie', component: BilleterieComponent },
     { 
         path: 'profile', component: ProfileComponent,
         canActivate: [authGuard]},

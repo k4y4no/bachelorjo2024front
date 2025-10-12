@@ -5,6 +5,8 @@
 }
 header{
     border: 1px solid white;
+    display: flex;
+    flex-direction: column;
     flex-basis: 20%;
 }
 main{
