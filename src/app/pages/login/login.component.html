@@ -15,7 +15,7 @@
         @if (loginUserForm.get('password')?.invalid && loginUserForm.get('password')?.touched){
             <span>Password is required</span>
         }
-        @if (errorMessage !== ''){
+        @if (errorMessage !== '' && loginUserForm.get('password')?.dirty){
             <span>{{errorMessage}}</span>
         }
       </div>
