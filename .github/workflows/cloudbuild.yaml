@@ -8,21 +8,21 @@ steps:
       - '--target'
       - 'prod'
       - '-t'
-      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:$SHORT_SHA'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$SHORT_SHA'
       - '-t'
-      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:latest'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:latest'
       - '.'
 
   # 2) Push vers Artifact Registry (regionné)
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - push
-      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:$SHORT_SHA'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$SHORT_SHA'
 
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - push
-      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:latest'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:latest'
 
   # 3) Deploy sur Cloud Run (managed)
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -32,7 +32,7 @@ steps:
       - deploy
       - '${_SERVICE}'
       - '--image'
-      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:$SHORT_SHA'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$SHORT_SHA'
       - '--region'
       - '${_REGION}'
       - '--platform'
@@ -44,8 +44,8 @@ steps:
       - '${_MAX_INSTANCES}'
 
 images:
-  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:$SHORT_SHA'
-  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:latest'
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$SHORT_SHA'
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:latest'
 
 substitutions:
   _SERVICE: 'jofront'
