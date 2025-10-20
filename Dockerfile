@@ -30,7 +30,7 @@ FROM nginx:mainline-alpine3.22-perl AS prod
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY --from=build /app/dist/jofront/browser /usr/share/nginx/html
+COPY --from=build /app/dist/bachelor-jo2024-front/browser /usr/share/nginx/html
 
 EXPOSE 8080
 
