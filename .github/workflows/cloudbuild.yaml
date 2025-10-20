@@ -1,0 +1,53 @@
+steps:
+  # 1) Build image en ciblant la stage "prod" du Dockerfile
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - build
+      - '--target'
+      - 'prod'
+      - '-t'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:$SHORT_SHA'
+      - '-t'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:latest'
+      - '.'
+
+  # 2) Push vers Artifact Registry (regionné)
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - push
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:$SHORT_SHA'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - push
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:latest'
+
+  # 3) Deploy sur Cloud Run (managed)
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - '${_SERVICE}'
+      - '--image'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:$SHORT_SHA'
+      - '--region'
+      - '${_REGION}'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '8080'
+      - '--max-instances'
+      - '${_MAX_INSTANCES}'
+
+images:
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:$SHORT_SHA'
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:latest'
+
+substitutions:
+  _SERVICE: 'jofront'
+  _REGION: 'europe-west1'
+  _REPO: 'jo-front'    # créer ce repo dans Artifact Registry
+  _MAX_INSTANCES: '2' 
+timeout: '1200s'

@@ -1,0 +1,41 @@
+<p>dashboard works!</p>
+<table>
+    <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Tickets Quantity</th>
+          <th>Delete</th>
+          <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (offers$ | async; as offerTickets) {
+            @for (offer of offerTickets; track offer.id) {
+                <tr>
+                    <td>{{ offer.name }}</td>
+                    <td>{{ offer.price | currency:'EUR' }}</td>
+                    <td>{{ offer.tickets_quantity }}</td>
+                    <td><button (click)="onDeleteOffer(offer.id)">Delete</button></td>
+                    <td><button (click)="onUpdateOffer(offer.id)">Update</button></td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+<form action="" [formGroup]="testForm" id="loginForm" (ngSubmit)="onSubmitTestOffer()">
+      <div>
+        <label>name:</label>
+        <input formControlName="name">
+      </div>
+      <div>
+        <label>price:</label>
+        <input formControlName="price" type="number">
+      </div>
+      <div>
+        <label>tickets quantity:</label>
+        <input formControlName="tickets_quantity" type="number">
+      </div>
+      <button type="submit">Submit</button>
+</form>
