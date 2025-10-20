@@ -1,3 +1,5 @@
+options:
+  logging: 'CLOUD_LOGGING_ONLY'
 steps:
   # 1) Build image en ciblant la stage "prod" du Dockerfile
   - name: 'gcr.io/cloud-builders/docker'
