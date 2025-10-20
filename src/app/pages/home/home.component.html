@@ -1,0 +1,11 @@
+<p>home works!</p>
+
+@if (events$ | async; as eventJO) {
+    @for ( event of eventJO; track event.id) {
+        <div>
+            <h3>{{ event.sport.name }}</h3>
+            <p>{{ event.date_event }}</p>
+            <p>{{ event.location.name }}</p>
+        </div>
+    }
+}

@@ -1,0 +1,21 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+header{
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 20%;
+}
+main{
+    border: 1px solid white;
+
+    flex-basis: 60%;
+}
+footer{
+    border: 1px solid white;
+
+    flex-basis: 20%;
+}
