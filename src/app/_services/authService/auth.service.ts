@@ -22,7 +22,7 @@ export class AuthService {
 
 
   login(credentials: { email: string; password: string }): Observable<ApiAuthResponse> {
-    return this.http.post<ApiAuthResponse>(`${this.authUrl}`, credentials, { withCredentials: true }
+    return this.http.post<ApiAuthResponse>(`${this.authUrl}/login`, credentials, { withCredentials: true }
     ).pipe(
         tap((response: ApiAuthResponse) => {
             // console.log('Login successful, user data:', response.user);
