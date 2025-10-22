@@ -23,7 +23,7 @@ FROM nodepack AS build
 
 COPY . .
 
-RUN npm run build  
+RUN npm run build  -- --configuration=production
 
 
 FROM nginx:mainline-alpine3.22-perl AS prod
